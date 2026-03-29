@@ -1,128 +1,20 @@
 # yoctogpt
 
-`v1.py` is a one-file, pure-Python, deliberately tiny GPT training script.
+`v1.py` is [micrograd](https://github.com/karpathy/micrograd) + [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95) (inspo from [nanogpt](https://github.com/karpathy/nanoGPT)). there are no dependencies. simply run `python3 v1.py` or `uv run v1.py` to see a GPT learn a tongue twister from zero knowledge about the world (brain starts as random numbers)
 
-It is basically `micrograd` plus a very small `nanoGPT`-style decoder, reduced until the whole thing fits in one obvious file:
+I admire karpathy's teaching approach where we introduces enough such that the curiousity of the student can fill in the rest. He makes it very fun to learn (I started with nanogpt :D). This is why I simplified this gpt-style pre-training educational example to exactly 100 lines. It requires experience with python, but if you put in the hours and study each line in here, you will have a solid mental model for how current LLMs and GPTs work.
 
-- scalar autograd
-- character-level tokenization
-- token and position embeddings
-- causal self-attention
-- MLP
-- next-token loss
-- RMSProp-like parameter update
-- streaming text generation
+In order to achieve this level of simplicity, I specifically use a simple character-level tokenizer, a single causal attention head rather than Multi-head Attention, a basic relu MLP (not MoE), a compact RMSprop like optimizer to help the nn learn fast without scarying you with complexity, val loss with text streaming to make it "feel" more intuitive, a simple version of position embeddings, and scalar level autograd to introduce backpropagation (how neural nets learn) in the cleanest way. You get some core lines of code to understand very deeply, and nothing else.
 
-The point is not speed. The point is to make the whole training loop small enough that a student can read it end to end and still recognize every moving part.
+I do have a whiteboard explanation of backprop for the simplest neural net -- a multi-layer perceptron on my youtube channel [here](https://youtu.be/0dbihoMRuyg?si=CvXDG6BC8khGcxoT). I made this to help teach myself how backprop works. I knew I understood it fully when I could explain to an audience on a whiteboard.
 
-## Why This Exists
+If you want to build a more modern mental model on how these transformers work at a bigger scale (million to billions of params), I recommend taking a look at this course I built on LLMs from scratch (inspo by nanogpt). It assumes very basic knowledge. I actually built [this course](https://youtu.be/UU1WVnMk4E8?si=RTKgM3YJNJSwsHz3) as I was learning how the models work, so I can confidently say you'll be able to connect the dots as I specifically optimized this course for concepts that were hard for me when I started out. You'll use pytorch and numpy.
 
-Most GPT codebases are practical before they are obvious.
+It runs purely on cpu with extremely slow and unoptimized code. If this is an area of interest and you have this GPT mental model well hammered out, I created a free course on [CUDA kernel programming (12 hrs)](https://youtu.be/86FAWCzIe_4?si=QJQ4tA1jY9HtpCyA) that has accumulated 500K+ views. This is a much deeper course which requires fluency in C and Python. Almost all of AI infra and performance focus in the world resides in CUDA.
 
-This one goes the other direction:
+Why did I make this you ask? Well... most GPT codebases are practical before they are obvious.
 
-- one file
-- standard library only
-- hardcoded dataset
-- hardcoded hyperparameters
-- no config system
-- no checkpoints
-- no batching machinery
-- no optimizer classes
-- no framework abstractions
-- no comments inside the code
-
-If a decision made the file easier to read and mentally simulate, it stayed. If it made the file more practical but harder to hold in your head, it got cut.
-
-## Design Decisions
-
-### 1. Pure Python Lists
-
-There is no `torch`, no `numpy`, and no custom extension code.
-
-Matrices are lists of lists. Parameters are scalar objects. Forward and backward passes happen in Python loops. This is slow on purpose. The slowness is educational because it makes the cost of each abstraction visible.
-
-### 2. Scalar Autograd Instead of Tensor Autograd
-
-The `V` class is the whole differentiation engine. Every scalar value knows:
-
-- its numeric value
-- its gradient
-- the children that produced it
-- the local derivatives needed for backprop
-
-The math is spelled out through a tiny scalar object with overloaded arithmetic plus a few explicit activations like `log`, `exp`, and `relu`. That keeps the lecture centered on autograd and neural nets instead of on framework internals. It also keeps the code brutally slow, which is acceptable here.
-
-### 3. Tiny Overfitting Dataset
-
-The dataset is a short Peter Piper rhyme embedded directly in the script. That choice is intentional:
-
-- the full corpus is visible in one glance
-- the vocabulary is tiny
-- the model can overfit in a short run
-- generation becomes interpretable quickly
-
-This is not a general language model. It is a learning artifact.
-
-### 4. Character-Level Tokens
-
-Each unique character becomes one token id. Tokenization is just `chars.index(c)`.
-
-That is inefficient, but it removes one more layer of hidden machinery. Students can understand the vocabulary immediately.
-
-### 5. `ctx = 8`
-
-The context window is intentionally small. The model only sees eight characters at a time during training and generation. That keeps the compute cheap enough for pure Python and makes the limitation easy to feel in the output.
-
-### 6. `nh = 1`
-
-There is only one attention head.
-
-Multi-head attention is useful in real models, but it adds slicing logic without changing the core idea of attention. Using one head keeps the attention path easier to read:
-
-- one query stream
-- one key stream
-- one value stream
-- one attention output
-
-That is a better trade for this file.
-
-### 7. Top-Level Training Script
-
-There is no application structure. The file initializes parameters and trains immediately when run.
-
-That is less reusable than a library layout, but it keeps the whole artifact linear:
-
-1. define the math
-2. define the model
-3. initialize weights
-4. train
-5. sample
-
-For this project, that is the right shape.
-
-### 8. Streaming Inference
-
-The sampled text prints one character at a time.
-
-This is not technically necessary, but it better matches how people expect model output to appear and makes the training checkpoints feel alive.
-
-## What The Script Prints
-
-Every 100 steps, and on the final step, the script prints:
-
-- validation loss
-- a 50-character continuation starting from `Peter Piper `
-
-The generated text streams as it is sampled.
-
-## Run
-
-Use `uv`:
-
-```bash
-uv run python v1.py
-```
+This one goes the other direction with just one file, standard library only, hardcoded dataset (yes, our goal is to overfit -- educational reasons), hardcoded hparams, no checkpoints, no batching, no optimizer complexity, no torch/tensorflow/numpy abstractions, and no comments.
 
 ## What To Look For
 
@@ -150,31 +42,3 @@ Read it in this order:
 7. the training loop at the bottom
 
 If you understand those seven pieces, you understand the whole project.
-
-## What This Is Not
-
-This is not:
-
-- fast
-- scalable
-- numerically polished
-- reusable infrastructure
-- a replacement for `nanoGPT`
-- a replacement for `micrograd`
-
-It is a compressed educational artifact.
-
-## Current Defaults
-
-- dataset: Peter Piper rhyme
-- vocab size: derived from the embedded text
-- context window: 8
-- embedding width: 16
-- layers: 1
-- attention path: single-head
-- training steps: 500
-- generation length: 50 characters
-
-## Why The Code Has No Comments
-
-The file is intentionally written so the structure has to carry the meaning. The README is where the explanation lives. That keeps the code itself dense and direct while still preserving the reasoning behind the choices.
