@@ -1,4 +1,5 @@
 # yoctogpt
+> Generatively Pre-train a Transformer in 100 lines of python
 
 `v1.py` is [micrograd](https://github.com/karpathy/micrograd) + [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95) (inspo from [nanogpt](https://github.com/karpathy/nanoGPT)). there are no dependencies. simply run `python3 v1.py` or `uv run v1.py` to see a GPT learn a tongue twister from zero knowledge about the world (brain starts as random numbers)
 
