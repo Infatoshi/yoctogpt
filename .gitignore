@@ -1,6 +1,5 @@
 .ruff_cache/
 .cursor/
 notion_public/
-images/*.png
 fcc.txt
 nanogpt.txt
