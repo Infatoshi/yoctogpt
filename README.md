@@ -1,6 +1,6 @@
 # yoctogpt
 > Generatively Pre-train a Transformer in 100 lines of python
-
+> notebook [here](https://colab.research.google.com/drive/133_4cWN8nQJ-4DyAFUaz4dRMOcGccNVY?usp=sharing)
 `v1.py` is [micrograd](https://github.com/karpathy/micrograd) + [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95) (inspo from [nanogpt](https://github.com/karpathy/nanoGPT)). there are no dependencies. simply run `python3 v1.py` or `uv run v1.py` to see a GPT learn a tongue twister from zero knowledge about the world (brain starts as random numbers)
 
 I admire karpathy's teaching approach where we introduces enough such that the curiousity of the student can fill in the rest. He makes it very fun to learn (I started with nanogpt :D). This is why I simplified this gpt-style pre-training educational example to exactly 100 lines. It requires experience with python, but if you put in the hours and study each line in here, you will have a solid mental model for how current LLMs and GPTs work.
