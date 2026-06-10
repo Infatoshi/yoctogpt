@@ -88,7 +88,8 @@ def generate_text(prompt="Peter Piper "):
 
 for step in range(2001):
     if step % 100 == 0:
-        print(f"\nstep {step}: val {compute_loss(val_data[:context_length + 1]).data:.4f}") or generate_text()
+        val_losses = [compute_loss(val_data[i : i + context_length + 1]).data for i in range(0, len(val_data) - context_length, 4)]
+        print(f"\nstep {step}: val {sum(val_losses) / len(val_losses):.4f}") or generate_text()
     start_idx = random.randint(0, len(train_data) - context_length - 1)
     current_loss = compute_loss(train_data[start_idx : start_idx + context_length + 1])
     current_loss.backward()

@@ -1,23 +1,23 @@
 # yoctogpt
 > Generatively Pre-train a Transformer in 100 lines of python
-> notebook [here](https://colab.research.google.com/drive/133_4cWN8nQJ-4DyAFUaz4dRMOcGccNVY?usp=sharing)
-`v1.py` is [micrograd](https://github.com/karpathy/micrograd) + [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95) (inspo from [nanogpt](https://github.com/karpathy/nanoGPT)). there are no dependencies. simply run `python3 v1.py` or `uv run v1.py` to see a GPT learn a tongue twister from zero knowledge about the world (brain starts as random numbers)
 
-I admire karpathy's teaching approach where we introduces enough such that the curiousity of the student can fill in the rest. He makes it very fun to learn (I started with nanogpt :D). This is why I simplified this gpt-style pre-training educational example to exactly 100 lines. It requires experience with python, but if you put in the hours and study each line in here, you will have a solid mental model for how current LLMs and GPTs work.
+Most GPT codebases are practical before they are obvious. This one goes the other direction: one file, standard library only, hardcoded dataset (yes, our goal is to overfit -- educational reasons), hardcoded hparams, no checkpoints, no batching, no torch/tensorflow/numpy abstractions.
 
-In order to achieve this level of simplicity, I specifically use a simple character-level tokenizer, a single causal attention head rather than Multi-head Attention, a basic relu MLP (not MoE), a compact RMSprop like optimizer to help the nn learn fast without scarying you with complexity, val loss with text streaming to make it "feel" more intuitive, a simple version of position embeddings, and scalar level autograd to introduce backpropagation (how neural nets learn) in the cleanest way. You get some core lines of code to understand very deeply, and nothing else.
+`v1.py` is [micrograd](https://github.com/karpathy/micrograd) + [microgpt](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95) (inspo from [nanogpt](https://github.com/karpathy/nanoGPT)). There are no dependencies. Simply run `python3 v1.py` or `uv run v1.py` to see a GPT learn a tongue twister from zero knowledge about the world (brain starts as random numbers).
 
-I do have a whiteboard explanation of backprop for the simplest neural net -- a multi-layer perceptron on my youtube channel [here](https://youtu.be/0dbihoMRuyg?si=CvXDG6BC8khGcxoT). I made this to help teach myself how backprop works. I knew I understood it fully when I could explain to an audience on a whiteboard.
+## Two ways in
 
-If you want to build a more modern mental model on how these transformers work at a bigger scale (million to billions of params), I recommend taking a look at this course I built on LLMs from scratch (inspo by nanogpt). It assumes very basic knowledge. I actually built [this course](https://youtu.be/UU1WVnMk4E8?si=RTKgM3YJNJSwsHz3) as I was learning how the models work, so I can confidently say you'll be able to connect the dots as I specifically optimized this course for concepts that were hard for me when I started out. You'll use pytorch and numpy.
+**The course:** the [notebook](https://colab.research.google.com/drive/133_4cWN8nQJ-4DyAFUaz4dRMOcGccNVY?usp=sharing) (`v1.ipynb`). Same model, expanded into readable code with explanations, diagrams, and experiments. If you know basic Python (lists, loops, classes) and nothing about ML, start here. No installs, just press run.
 
-It runs purely on cpu with extremely slow and unoptimized code. If this is an area of interest and you have this GPT mental model well hammered out, I created a free course on [CUDA kernel programming (12 hrs)](https://youtu.be/86FAWCzIe_4?si=QJQ4tA1jY9HtpCyA) that has accumulated 500K+ views. This is a much deeper course which requires fluency in C and Python. Almost all of AI infra and performance focus in the world resides in CUDA.
+**The trophy:** `v1.py`. The whole thing compressed to under 100 lines, comment-free. Read it *after* the notebook, as a victory lap: everything you learned, on one screen. If you put in the hours and study each line, you will have a solid mental model for how current LLMs and GPTs work.
 
-Why did I make this you ask? Well... most GPT codebases are practical before they are obvious.
+I admire karpathy's teaching approach where he introduces enough such that the curiosity of the student can fill in the rest. He makes it very fun to learn (I started with nanogpt :D). That's the goal here too.
 
-This one goes the other direction with just one file, standard library only, hardcoded dataset (yes, our goal is to overfit -- educational reasons), hardcoded hparams, no checkpoints, no batching, no optimizer complexity, no torch/tensorflow/numpy abstractions, and no comments.
+## What got simplified (and why)
 
-## What To Look For
+To keep the core ideas bare: a character-level tokenizer, a single causal attention head rather than Multi-head Attention, a basic relu MLP (not MoE), a compact RMSprop-like optimizer to help the nn learn fast without scaring you with complexity, val loss with text streaming to make it "feel" more intuitive, a simple version of position embeddings, and scalar-level autograd to introduce backpropagation (how neural nets learn) in the cleanest way. You get some core lines of code to understand very deeply, and nothing else.
+
+## What to look for
 
 At the beginning, the output is mostly garbage.
 
@@ -26,20 +26,26 @@ As training continues, the model starts to recover:
 - repeated letter patterns
 - the phrase `Peter Piper`
 - fragments of `pickled peppers`
-- the rhyme’s line rhythm
+- the rhyme's line rhythm
 
 Because the model is tiny and the context is only eight characters, it never becomes clean or robust. That limitation is part of the lesson.
 
-## How To Read The File
+## How to read v1.py
 
 Read it in this order:
 
 1. dataset and hyperparameters
-2. `V`
-3. `mat`, `lin`, `norm`, `soft`
-4. `gpt`
-5. `loss`
-6. `inference`
+2. `Value` (the autograd engine)
+3. `linear`, `normalize`, `softmax`
+4. `gpt_forward`
+5. `compute_loss`
+6. `generate_text`
 7. the training loop at the bottom
 
 If you understand those seven pieces, you understand the whole project.
+
+## Going deeper
+
+- **Backprop on a whiteboard:** I have a whiteboard explanation of backprop for the simplest neural net (an MLP) [here](https://youtu.be/0dbihoMRuyg?si=CvXDG6BC8khGcxoT). I made it to teach myself how backprop works. I knew I understood it fully when I could explain it to an audience on a whiteboard.
+- **Real scale with PyTorch:** my [LLMs from scratch course](https://youtu.be/UU1WVnMk4E8?si=RTKgM3YJNJSwsHz3) (freeCodeCamp). I built it as I was learning how the models work, so it's specifically optimized for the concepts that were hard for me when I started out. PyTorch and numpy.
+- **Make it fast:** yoctogpt runs purely on cpu with extremely slow, unoptimized code. Once the GPT mental model is hammered out, my free [CUDA kernel programming course (12 hrs)](https://youtu.be/86FAWCzIe_4?si=QJQ4tA1jY9HtpCyA) (500K+ views) goes deep on GPU performance. Requires fluency in C and Python. Almost all of AI infra and performance focus in the world resides in CUDA.

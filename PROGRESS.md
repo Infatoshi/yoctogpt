@@ -1,103 +1,62 @@
 # YoctoGPT — Session Progress
 
-## Current State (Last Updated: April 2026)
+## Current State (Last Updated: June 2026)
 
-The project is ready for video recording. Both `v1.py` and `v1.ipynb` are complete and synchronized.
+Ready for review before recording. `v1.ipynb` is now the canonical course notebook (52 cells), `v1.py` is the 98-line trophy artifact, and all 7 diagrams render from `.excalidraw` sources via a headless pipeline.
 
----
-
-## Completed Work
-
-### 1. Code Cleanup — Variable Naming
-Both files now use **matching, readable variable names**:
-
-| Variable | Purpose |
-|----------|---------|
-| `Value` | Autograd scalar class |
-| `characters`, `vocab_size` | Tokenizer vocabulary |
-| `context_length`, `embed_dim`, `num_layers`, `learning_rate` | Hyperparameters |
-| `train_data`, `val_data` | Data splits |
-| `make_matrix` | Weight initializer |
-| `weights` | Model state dict |
-| `token_embed`, `position_embed`, `output_proj` | Embedding/output weight keys |
-| `layer{i}.query/key/value/attn_out/ff_up/ff_down` | Per-layer weight keys |
-| `linear`, `normalize`, `softmax` | Neural net primitives |
-| `gpt_forward` | Forward pass |
-| `key_cache`, `value_cache` | KV cache for attention |
-| `attention_scores`, `attention_weights` | Attention intermediates |
-| `compute_loss` | Loss function |
-| `generate_text` | Inference/generation |
-| `all_parameters` | Flat param list for optimizer |
-
-### 2. Notebook (`v1.ipynb`)
-- **42 cells** with extensive markdown explanations
-- Beginner-friendly: assumes only Python knowledge
-- Progressive complexity: builds from tokenization → autograd → full GPT
-- 6 embedded Excalidraw diagrams in `images/`:
-  - `01-computation-graph.png` — basic autograd visualization
-  - `02-chain-rule.png` — chain rule example
-  - `03-token-embedding.png` — embedding lookup illustration  
-  - `04-attention.png` — attention mechanism
-  - `05-gpt-block.png` — transformer block with residuals
-  - `06-full-gpt.png` — complete model overview
-- Interactive "TRY IT YOURSELF" cells for experimentation
-- Terminology dictionary at the top
-
-### 3. Script (`v1.py`)
-- **97 lines** (under 100 target)
-- `# fmt: off` at top to prevent auto-formatter expansion
-- Same logic as notebook, just compact
-- Runs 2001 training steps (user changed from 501)
-
-### 4. Residual Connections
-Confirmed present in both files:
-```python
-residual, x = x, normalize(x)  # save pre-norm
-# ... attention ...
-x = [...attention_output + residual...]  # skip connection 1
-# ... feedforward ...
-x = [...ff_output + x...]  # skip connection 2
-```
-This is Pre-LN (normalize before attention/FFN, not after).
+### Positioning (locked in)
+- **Notebook = the course.** Readable expanded code, explanations, diagrams, experiments. Teach and record from this.
+- **v1.py = the trophy.** Comment-free compressed form, revealed at the end ("everything you learned, on one screen"). Never walk beginners through the golfed code line by line.
+- True audience: knows basic Python, knows zero ML. Intro speech order for the video: cold open (terminal demo) -> 30-45s motivation -> roadmap.
 
 ---
 
-## Files Structure
+## June 2026 session: review-driven rework
 
-```
-yoctogpt/
-├── v1.py              # 97-line polished script
-├── v1.ipynb           # Educational notebook with diagrams
-├── README.md          # Project overview
-├── planning.md        # Video teaching plan (8 sections)
-├── PROGRESS.md        # This file
-└── images/
-    ├── 01-computation-graph.png
-    ├── 01-computation-graph.excalidraw
-    ├── 02-chain-rule.png
-    ├── 02-chain-rule.excalidraw
-    ├── 03-token-embedding.png
-    ├── 03-token-embedding.excalidraw
-    ├── 04-attention.png
-    ├── 04-attention.excalidraw
-    ├── 05-gpt-block.png
-    ├── 05-gpt-block.excalidraw
-    ├── 06-full-gpt.png
-    └── 06-full-gpt.excalidraw
-```
+### Notebook (`v1.ipynb`, 52 cells) — merged from Colab copy + local, then upgraded
+- Intro compressed from 6 markdown cells to 2 (hook with before/after, no-math version, big-picture image)
+- Terminology dictionary moved to bottom as appendix (define-at-first-use instead of front-loaded glossary)
+- "You Be the Model" beat before the loss section (reader predicts `Peter Pi_`)
+- ChatGPT bridge paragraph at generate_text (predict-sample-append-repeat IS ChatGPT streaming)
+- Training loop now matches v1.py: RMSprop-style optimizer (markdown said RMSprop but code was plain SGD), 1,000 steps, `step % 100 == 0` val checks
+- Val loss averaged over 4 windows (was 1 fixed window; bounced non-monotonically and would have generated "is it broken?" comments)
+- Loss curve plot cell (train noisy + val + random-guessing line; matplotlib for plotting only)
+- NEW section 9: attention heatmap for "Peter Pi" via `gpt_forward(..., return_attention=True)` — clear sparse lower-triangular structure, final `i` attends to `P`
+- NEW section 10: play cells + temperature TRY IT (temperature param added to generate_text)
+- NEW section 11: train-on-your-own-text instructions
+- `txt` synced to v1.py version (newlines + "Where's") so vocab stays 24 and params 3,968, matching the diagrams
+- Deleted scratch cell (`a = 3; b = 1; type(a)`); all "500 steps" references fixed to 1,000
+
+### Verified by execution (June 10, 2026, M4 Max)
+- Full notebook executes with 0 errors; vocab 24, params 3,968, initial loss 3.34 vs ln(24)=3.18
+- Training arc: val 3.23 -> 1.24 (step 100) -> 0.53 (step 400) -> ~0.43 (step 1000); gibberish -> "Peter Piper picked a..."
+- v1.py: 200 steps = 10.5s locally, so full 2001-step run ~105s (can train live on camera)
+
+### v1.py (98 lines)
+- Val loss averaged over 4 windows (same fix as notebook). Verified: 3.23 -> 0.87 -> 0.78 -> 0.52 monotonic-ish.
+
+### README
+- Restructured: hook first, "two ways in" (course vs trophy) framing, course funnel moved to bottom ("Going deeper")
+
+### Diagrams (all 7 re-rendered at 2x from .excalidraw via headless Chrome + excalidraw 0.18)
+- `02-chain-rule`: removed stray red lines; backward red arrows now flow along the actual graph edges with grad multipliers at the ops ("grad ×(2·sum) = ×10", "grad ×1 to each")
+- `04-attention`: added grayed crossed-out future token ("can't look ahead!") — causality now visible; caption extended
+- `06-full-gpt`: parameter box completed (was authored with literal "..."): 384+128+1,024+2,048+384 = 3,968
+- `07-training-loop`: NEW — forward/loss/backward/update cycle, "repeat ×1,000" center
+- Render pipeline (rebuild any PNG): `/tmp/exca/render.py` pattern — exportToSvg from esm.sh @excalidraw/excalidraw@0.18.0 in headless Chrome, inline SVG, screenshot at computed size. Kroki.io excalidraw endpoint was down (504s).
 
 ---
 
-## Pending / Ideas
+## Pending
 
-- [ ] Record the video following `planning.md` structure
-- [ ] The notebook text slightly differs from v1.py's txt (notebook has periods/commas in different places) — may want to sync if it matters
-- [ ] Consider adding more "TRY IT YOURSELF" experiments
-- [ ] Could add a cell showing the learned embeddings (PCA/t-SNE of token_embed)
+- [ ] User review, then: commit + push (the notebook references `images/07-training-loop.png` via raw GitHub URL — 404s until pushed; edited diagrams show stale until pushed)
+- [ ] After push: `gog upload v1.ipynb -a infatoshi@gmail.com --replace=133_4cWN8nQJ-4DyAFUaz4dRMOcGccNVY` (updates the Colab file in place, link preserved)
+- [ ] Record the video following `planning.md`
+- [ ] Before recording: one test run of the notebook in actual Colab to quote its (slower) training time to viewers
 
 ---
 
-## Teaching Notes (from last session)
+## Teaching Notes (kept from earlier session)
 
 ### Explaining `backward()` to students:
 
@@ -133,11 +92,7 @@ for node in reversed(topo_order):
 ## Quick Resume Commands
 
 ```bash
-cd /Users/infatoshi/yoctogpt
-python v1.py  # runs training (2001 steps)
-```
-
-To test notebook:
-```bash
-jupyter notebook v1.ipynb
+cd /Users/infatoshi/dev/teaching/yoctogpt
+uv run v1.py                # runs training (2001 steps, ~105s on M4 Max)
+uv run --with jupyter,matplotlib jupyter notebook v1.ipynb
 ```
