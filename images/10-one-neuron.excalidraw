@@ -1,0 +1,617 @@
+{
+ "type": "excalidraw",
+ "version": 2,
+ "source": "https://excalidraw.com",
+ "elements": [
+  {
+   "id": "prev",
+   "type": "rectangle",
+   "x": 30,
+   "y": 190,
+   "width": 110,
+   "height": 70,
+   "strokeColor": "#adb5bd",
+   "backgroundColor": "transparent",
+   "strokeWidth": 2,
+   "strokeStyle": "dashed",
+   "roundness": {
+    "type": 3
+   }
+  },
+  {
+   "id": "prev_t",
+   "type": "text",
+   "x": 59.56,
+   "y": 207,
+   "width": 50.88,
+   "height": 31,
+   "text": "previous\nlayer",
+   "fontSize": 12,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#adb5bd"
+  },
+  {
+   "id": "x_c",
+   "type": "ellipse",
+   "x": 205,
+   "y": 125,
+   "width": 70,
+   "height": 70,
+   "strokeColor": "#1971c2",
+   "backgroundColor": "#a5d8ff",
+   "strokeWidth": 2
+  },
+  {
+   "id": "x_t",
+   "type": "text",
+   "x": 235.76,
+   "y": 138,
+   "width": 8.48,
+   "height": 42,
+   "text": "x\n3",
+   "fontSize": 16,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#1e1e1e"
+  },
+  {
+   "id": "x_l",
+   "type": "text",
+   "x": 190.445,
+   "y": 88,
+   "width": 99.11,
+   "height": 14,
+   "text": "the layer's input",
+   "fontSize": 11,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#868e96"
+  },
+  {
+   "id": "w_c",
+   "type": "ellipse",
+   "x": 205,
+   "y": 285,
+   "width": 70,
+   "height": 70,
+   "strokeColor": "#f08c00",
+   "backgroundColor": "#ffd8a8",
+   "strokeWidth": 2
+  },
+  {
+   "id": "w_t",
+   "type": "text",
+   "x": 235.76,
+   "y": 298,
+   "width": 8.48,
+   "height": 42,
+   "text": "w\n2",
+   "fontSize": 16,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#1e1e1e"
+  },
+  {
+   "id": "w_l",
+   "type": "text",
+   "x": 193.36,
+   "y": 362,
+   "width": 93.28,
+   "height": 14,
+   "text": "trainable weight",
+   "fontSize": 11,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#868e96"
+  },
+  {
+   "id": "op",
+   "type": "rectangle",
+   "x": 340,
+   "y": 200,
+   "width": 50,
+   "height": 50,
+   "strokeColor": "#f08c00",
+   "backgroundColor": "#ffd8a8",
+   "strokeWidth": 2
+  },
+  {
+   "id": "op_t",
+   "type": "text",
+   "x": 358.64,
+   "y": 210,
+   "width": 12.72,
+   "height": 31,
+   "text": "×",
+   "fontSize": 24,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#1e1e1e"
+  },
+  {
+   "id": "y_c",
+   "type": "ellipse",
+   "x": 445,
+   "y": 190,
+   "width": 70,
+   "height": 70,
+   "strokeColor": "#2f9e44",
+   "backgroundColor": "#b2f2bb",
+   "strokeWidth": 2
+  },
+  {
+   "id": "y_t",
+   "type": "text",
+   "x": 475.76,
+   "y": 203,
+   "width": 8.48,
+   "height": 42,
+   "text": "y\n6",
+   "fontSize": 16,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#1e1e1e"
+  },
+  {
+   "id": "loss",
+   "type": "rectangle",
+   "x": 575,
+   "y": 193,
+   "width": 130,
+   "height": 64,
+   "strokeColor": "#e03131",
+   "backgroundColor": "#ffc9c9",
+   "strokeWidth": 2,
+   "roundness": {
+    "type": 3
+   }
+  },
+  {
+   "id": "loss_t",
+   "type": "text",
+   "x": 598.66,
+   "y": 203,
+   "width": 82.68,
+   "height": 34,
+   "text": "loss\n(y-10)² = 16",
+   "fontSize": 13,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#1e1e1e"
+  },
+  {
+   "id": "f_x",
+   "type": "arrow",
+   "x": 271.05258804321085,
+   "y": 176.14734578246964,
+   "width": 64.94741195678915,
+   "height": 35.85265421753036,
+   "strokeColor": "#1e1e1e",
+   "strokeWidth": 2,
+   "roughness": 1,
+   "roundness": {
+    "type": 2
+   },
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     30.05730663427005,
+     22.30365668394164
+    ],
+    [
+     64.94741195678915,
+     35.85265421753036
+    ]
+   ]
+  },
+  {
+   "id": "f_w",
+   "type": "arrow",
+   "x": 267.06437266737396,
+   "y": 297.80721441275335,
+   "width": 68.93562733262604,
+   "height": 59.80721441275335,
+   "strokeColor": "#1e1e1e",
+   "strokeWidth": 2,
+   "roughness": 1,
+   "roundness": {
+    "type": 2
+   },
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     31.191190233075098,
+     -33.68034374428293
+    ],
+    [
+     68.93562733262604,
+     -59.80721441275335
+    ]
+   ]
+  },
+  {
+   "id": "f_op",
+   "type": "arrow",
+   "x": 393,
+   "y": 225,
+   "width": 49,
+   "height": 0,
+   "strokeColor": "#1e1e1e",
+   "strokeWidth": 2,
+   "roughness": 1,
+   "roundness": {
+    "type": 2
+   },
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     24.5,
+     5.0
+    ],
+    [
+     49,
+     0
+    ]
+   ]
+  },
+  {
+   "id": "f_y",
+   "type": "arrow",
+   "x": 518,
+   "y": 225,
+   "width": 53,
+   "height": 0,
+   "strokeColor": "#1e1e1e",
+   "strokeWidth": 2,
+   "roughness": 1,
+   "roundness": {
+    "type": 2
+   },
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     26.5,
+     5.0
+    ],
+    [
+     53,
+     0
+    ]
+   ]
+  },
+  {
+   "id": "b_loss",
+   "type": "arrow",
+   "x": 572,
+   "y": 262,
+   "width": 50,
+   "height": 0,
+   "strokeColor": "#e03131",
+   "strokeWidth": 2,
+   "roughness": 1,
+   "roundness": {
+    "type": 2
+   },
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     -25.0,
+     -5.0
+    ],
+    [
+     -50,
+     0
+    ]
+   ]
+  },
+  {
+   "id": "b_y",
+   "type": "arrow",
+   "x": 442,
+   "y": 262,
+   "width": 46,
+   "height": 0,
+   "strokeColor": "#e03131",
+   "strokeWidth": 2,
+   "roughness": 1,
+   "roundness": {
+    "type": 2
+   },
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     -23.0,
+     -5.0
+    ],
+    [
+     -46,
+     0
+    ]
+   ]
+  },
+  {
+   "id": "b_w",
+   "type": "arrow",
+   "x": 334,
+   "y": 252,
+   "width": 54,
+   "height": 46,
+   "strokeColor": "#e03131",
+   "strokeWidth": 2,
+   "roughness": 1,
+   "roundness": {
+    "type": 2
+   },
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     -30.890798733598746,
+     18.43254061707973
+    ],
+    [
+     -54,
+     46
+    ]
+   ]
+  },
+  {
+   "id": "b_x",
+   "type": "arrow",
+   "x": 334,
+   "y": 196,
+   "width": 54,
+   "height": 22,
+   "strokeColor": "#e03131",
+   "strokeWidth": 2,
+   "roughness": 1,
+   "roundness": {
+    "type": 2
+   },
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     -29.263781323881116,
+     -5.443445841382713
+    ],
+    [
+     -54,
+     -22
+    ]
+   ]
+  },
+  {
+   "id": "b_prev",
+   "type": "arrow",
+   "x": 207.74276187016773,
+   "y": 173.58199500203466,
+   "width": 59.742761870167726,
+   "height": 34.41800499796534,
+   "strokeColor": "#e03131",
+   "strokeWidth": 2,
+   "roughness": 1,
+   "roundness": {
+    "type": 2
+   },
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     -26.876244274597703,
+     22.407959739142644
+    ],
+    [
+     -59.742761870167726,
+     34.41800499796534
+    ]
+   ]
+  },
+  {
+   "id": "seed",
+   "type": "text",
+   "x": 560,
+   "y": 290,
+   "width": 165.36,
+   "height": 31,
+   "text": "start: dL/dy = -8\n\"y too small: increase me\"",
+   "fontSize": 12,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#e03131"
+  },
+  {
+   "id": "lev_w",
+   "type": "text",
+   "x": 300,
+   "y": 308,
+   "width": 95.4,
+   "height": 31,
+   "text": "× 3 (x's value)\nw.grad = -24",
+   "fontSize": 12,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#e03131"
+  },
+  {
+   "id": "sig_w",
+   "type": "text",
+   "x": 318,
+   "y": 352,
+   "width": 110.77000000000001,
+   "height": 14,
+   "text": "the training signal",
+   "fontSize": 11,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#868e96"
+  },
+  {
+   "id": "lev_x",
+   "type": "text",
+   "x": 295,
+   "y": 130,
+   "width": 95.4,
+   "height": 31,
+   "text": "× 2 (w's value)\nx.grad = -16",
+   "fontSize": 12,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#e03131"
+  },
+  {
+   "id": "msg",
+   "type": "text",
+   "x": 30,
+   "y": 120,
+   "width": 169.07000000000002,
+   "height": 29,
+   "text": "the message keeps going left:\n\"send bigger x\"",
+   "fontSize": 11,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#868e96"
+  },
+  {
+   "id": "o1_c",
+   "type": "ellipse",
+   "x": 410,
+   "y": 120,
+   "width": 26,
+   "height": 26,
+   "strokeColor": "#1e1e1e",
+   "backgroundColor": "#ffffff",
+   "strokeWidth": 2
+  },
+  {
+   "id": "o1_n",
+   "type": "text",
+   "x": 418,
+   "y": 123,
+   "width": 7.95,
+   "height": 20,
+   "text": "1",
+   "fontSize": 15,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#1e1e1e"
+  },
+  {
+   "id": "o1_t",
+   "type": "text",
+   "x": 444,
+   "y": 124,
+   "width": 110.24000000000001,
+   "height": 17,
+   "text": "forward: compute",
+   "fontSize": 13,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#2f9e44"
+  },
+  {
+   "id": "o2_c",
+   "type": "ellipse",
+   "x": 380,
+   "y": 381,
+   "width": 26,
+   "height": 26,
+   "strokeColor": "#1e1e1e",
+   "backgroundColor": "#ffffff",
+   "strokeWidth": 2
+  },
+  {
+   "id": "o2_n",
+   "type": "text",
+   "x": 388,
+   "y": 384,
+   "width": 7.95,
+   "height": 20,
+   "text": "2",
+   "fontSize": 15,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#1e1e1e"
+  },
+  {
+   "id": "o2_t",
+   "type": "text",
+   "x": 414,
+   "y": 385,
+   "width": 268.71000000000004,
+   "height": 17,
+   "text": "backward: split the blame, pass it left",
+   "fontSize": 13,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#e03131"
+  },
+  {
+   "id": "cap_t",
+   "type": "text",
+   "x": 235.84,
+   "y": 430,
+   "width": 288.32,
+   "height": 22,
+   "text": "One neuron: where the blame goes",
+   "fontSize": 17,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#1e1e1e"
+  },
+  {
+   "id": "cap_1",
+   "type": "text",
+   "x": 80.28499999999997,
+   "y": 462,
+   "width": 599.4300000000001,
+   "height": 17,
+   "text": "each input's leverage is the OTHER input's value: local_grads = (other.data, self.data)",
+   "fontSize": 13,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#868e96"
+  },
+  {
+   "id": "cap_2",
+   "type": "text",
+   "x": 100.95499999999998,
+   "y": 488,
+   "width": 558.09,
+   "height": 17,
+   "text": "w.grad trains the weight; x.grad is the message that keeps the error flowing left",
+   "fontSize": 13,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#868e96"
+  }
+ ],
+ "appState": {
+  "viewBackgroundColor": "#ffffff"
+ }
+}
