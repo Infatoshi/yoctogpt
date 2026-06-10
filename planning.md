@@ -39,7 +39,7 @@ the payoff: if you deeply understand these 100 lines, you have a real mental mod
 - explain character-level tokenizer: "each unique character gets a number. that's it. production LLMs use subword tokenizers (BPE / sentencepiece) but the concept is identical — text goes in, integers come out"
 - show the encoded integers, point out the mapping is reversible
 - train/val split: "we hide 10% of the data. if the model can predict those unseen characters well, it actually learned the *pattern*, not just memorized"
-- set hyperparameters: ctx=8, d=16, nl=1, lr=0.01. "these are intentionally tiny. 8 characters of context, 16-dimensional embeddings, 1 layer. the whole model is ~4000 parameters. GPT-4 has maybe a trillion. same architecture though."
+- set hyperparameters: ctx=8, d=16, nl=1, lr=0.01. "these are intentionally tiny. 8 characters of context, 16-dimensional embeddings, 1 layer. the whole model is ~4000 parameters. frontier models like Claude Opus or GPT-5.5 have trillions. same architecture though."
 
 ### 2 · autograd engine (class V)
 - this is the hardest section conceptually. go slow.
@@ -86,7 +86,7 @@ the payoff: if you deeply understand these 100 lines, you have a real mental mod
 - explain the optimizer: "this is a simplified RMSProp. it keeps a running average of squared gradients so parameters that get big gradients take smaller steps. prevents oscillation."
 - "every 100 steps we check val loss and generate a sample — this is how you know training is working."
 - let it run. watch the loss drop. watch the generation go from noise → "Peter Piper" → recognizable phrases.
-- closing: "you just trained a transformer language model from scratch. 100 lines. no libraries. everything you saw here — the autograd, the attention, the feedforward, the training loop — this is what's inside GPT-4, Claude, Gemini. scaled up enormously, but the same fundamental ideas."
+- closing: "you just trained a transformer language model from scratch. 100 lines. no libraries. everything you saw here — the autograd, the attention, the feedforward, the training loop — this is what's inside ChatGPT, Claude, Gemini. scaled up enormously, but the same fundamental ideas."
 
 ## what to point out (karpathy-style "aha" moments)
 - the model starts as pure random numbers and *learns* english character patterns just from gradient descent
