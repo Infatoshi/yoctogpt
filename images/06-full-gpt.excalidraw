@@ -4,32 +4,6 @@
  "source": "claude",
  "elements": [
   {
-   "id": "title",
-   "type": "text",
-   "x": 250,
-   "y": 15,
-   "width": 300,
-   "height": 35,
-   "text": "YoctoGPT: Full Model",
-   "fontSize": 26,
-   "fontFamily": 5,
-   "textAlign": "center",
-   "strokeColor": "#1e1e1e"
-  },
-  {
-   "id": "subtitle",
-   "type": "text",
-   "x": 180,
-   "y": 50,
-   "width": 440,
-   "height": 20,
-   "text": "From character to next-character prediction",
-   "fontSize": 14,
-   "fontFamily": 5,
-   "textAlign": "center",
-   "strokeColor": "#868e96"
-  },
-  {
    "id": "input_char",
    "type": "rectangle",
    "x": 50,
@@ -77,17 +51,24 @@
    "height": 0,
    "strokeColor": "#1e1e1e",
    "strokeWidth": 2,
-   "roughness": 0,
+   "roughness": 1,
    "points": [
     [
      0,
      0
     ],
     [
+     20.0,
+     4.8
+    ],
+    [
      40,
      0
     ]
-   ]
+   ],
+   "roundness": {
+    "type": 2
+   }
   },
   {
    "id": "tok_embed",
@@ -210,17 +191,24 @@
    "height": 30,
    "strokeColor": "#1e1e1e",
    "strokeWidth": 2,
-   "roughness": 0,
+   "roughness": 1,
    "points": [
     [
      0,
      0
     ],
     [
+     18.6,
+     11.4
+    ],
+    [
      30,
      30
     ]
-   ]
+   ],
+   "roundness": {
+    "type": 2
+   }
   },
   {
    "id": "arrow_pos_add",
@@ -231,17 +219,24 @@
    "height": -30,
    "strokeColor": "#1e1e1e",
    "strokeWidth": 2,
-   "roughness": 0,
+   "roughness": 1,
    "points": [
     [
      0,
      0
     ],
     [
+     18.6,
+     -11.4
+    ],
+    [
      30,
      -30
     ]
-   ]
+   ],
+   "roundness": {
+    "type": 2
+   }
   },
   {
    "id": "arrow_to_block",
@@ -252,17 +247,24 @@
    "height": 0,
    "strokeColor": "#1e1e1e",
    "strokeWidth": 2,
-   "roughness": 0,
+   "roughness": 1,
    "points": [
     [
      0,
      0
     ],
     [
+     17.5,
+     -4.2
+    ],
+    [
      35,
      0
     ]
-   ]
+   ],
+   "roundness": {
+    "type": 2
+   }
   },
   {
    "id": "block_frame",
@@ -404,17 +406,24 @@
    "height": 0,
    "strokeColor": "#1e1e1e",
    "strokeWidth": 2,
-   "roughness": 0,
+   "roughness": 1,
    "points": [
     [
      0,
      0
     ],
     [
+     17.5,
+     4.2
+    ],
+    [
      35,
      0
     ]
-   ]
+   ],
+   "roundness": {
+    "type": 2
+   }
   },
   {
    "id": "output_proj",
@@ -451,17 +460,24 @@
    "height": 0,
    "strokeColor": "#1e1e1e",
    "strokeWidth": 2,
-   "roughness": 0,
+   "roughness": 1,
    "points": [
     [
      0,
      0
     ],
     [
+     17.5,
+     -4.2
+    ],
+    [
      35,
      0
     ]
-   ]
+   ],
+   "roundness": {
+    "type": 2
+   }
   },
   {
    "id": "softmax_box",
@@ -678,6 +694,32 @@
    "fontFamily": 5,
    "textAlign": "left",
    "strokeColor": "#1e1e1e"
+  },
+  {
+   "id": "06_cap_title",
+   "type": "text",
+   "x": 324.9,
+   "y": 585,
+   "width": 180.20000000000002,
+   "height": 21,
+   "text": "YoctoGPT: Full Model",
+   "fontSize": 17,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#1e1e1e"
+  },
+  {
+   "id": "06_cap_sub",
+   "type": "text",
+   "x": 266.865,
+   "y": 617,
+   "width": 296.27000000000004,
+   "height": 16,
+   "text": "From character to next-character prediction",
+   "fontSize": 13,
+   "fontFamily": 5,
+   "textAlign": "left",
+   "strokeColor": "#868e96"
   }
  ],
  "appState": {
