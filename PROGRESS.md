@@ -47,6 +47,12 @@ Ready for review before recording. `v1.ipynb` is now the canonical course notebo
 
 ---
 
+### Terminology depth pass (post-review)
+- Section 4 rewritten: matmul walked numerically (new diagram `08-matrix-vector`), "projection" established from dot products, RMS normalization actual math + explode/vanish why, nonlinearity explained via the linear-collapse argument with a runnable proof cell (two matmuls == one matmul)
+- New diagram `09-scalars-to-matrices`: Value scalar -> list -> matrix, the micrograd-to-tensor storage bridge
+- Term mechanics added: token (arcade token stand-in), embedding (discrete symbols embedded into continuous space), position embedding (attention is order-blind), attention (= learned weighted average, fixed budget of focus)
+- Appendix dictionary expanded: projection, RMS normalization, nonlinearity, logits, KV cache entries added
+
 ## Pending
 
 - [ ] User review, then: commit + push (the notebook references `images/07-training-loop.png` via raw GitHub URL — 404s until pushed; edited diagrams show stale until pushed)
