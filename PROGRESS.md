@@ -58,6 +58,7 @@ Ready for review before recording. `v1.ipynb` is now the canonical course notebo
 - [ ] User review, then: commit + push (the notebook references `images/07-training-loop.png` via raw GitHub URL — 404s until pushed; edited diagrams show stale until pushed)
 - [ ] After push: `gog upload v1.ipynb -a infatoshi@gmail.com --replace=133_4cWN8nQJ-4DyAFUaz4dRMOcGccNVY` (updates the Colab file in place, link preserved)
 - [ ] Record the video following `planning.md`
+- [ ] Record a short "Python idioms" aside (range, zip, enumerate, one-line loops/comprehensions) for beginners; slot it early, before the Value class
 - [ ] Before recording: one test run of the notebook in actual Colab to quote its (slower) training time to viewers
 
 ---
