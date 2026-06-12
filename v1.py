@@ -7,9 +7,11 @@ txt = "Peter Piper picked a peck of pickled peppers.\nA peck of pickled peppers 
 characters, vocab_size, context_length, embed_dim, num_layers, learning_rate = sorted(set(txt)), len(set(txt)), 8, 16, 1, 0.01
 train_data, val_data = (ids := [characters.index(c) for c in txt])[: int(len(ids) * 0.9)], ids[int(len(ids) * 0.9) :]
 
+tape = []
 class Value:
     def __init__(self, data, children=(), local_grads=()):
         self.data, self.grad, self.children, self.local_grads = data, 0.0, children, local_grads
+        tape.append(self)
     def __add__(self, b):
         b = b if isinstance(b, Value) else Value(b)
         return Value(self.data + b.data, (self, b), (1, 1))
@@ -27,12 +29,8 @@ class Value:
     def relu(self):
         return Value(max(0, self.data), (self,), (float(self.data > 0),))
     def backward(self):
-        topo, seen = [], set()
-        def walk(n):
-            n not in seen and (seen.add(n), [walk(c) for c in n.children], topo.append(n))
-        walk(self)
         self.grad = 1.0
-        [setattr(c, "grad", c.grad + g * n.grad) for n in reversed(topo) for c, g in zip(n.children, n.local_grads)]
+        [setattr(c, "grad", c.grad + g * n.grad) for n in reversed(tape) for c, g in zip(n.children, n.local_grads)]
 
 def make_matrix(rows, cols):
     return [[Value(random.gauss(0, 0.08)) for _ in range(cols)] for _ in range(rows)]
@@ -91,6 +89,7 @@ for step in range(2001):
         val_losses = [compute_loss(val_data[i : i + context_length + 1]).data for i in range(0, len(val_data) - context_length, 4)]
         print(f"\nstep {step}: val {sum(val_losses) / len(val_losses):.4f}") or generate_text()
     start_idx = random.randint(0, len(train_data) - context_length - 1)
+    tape.clear()
     current_loss = compute_loss(train_data[start_idx : start_idx + context_length + 1])
     current_loss.backward()
     for p in all_parameters:
